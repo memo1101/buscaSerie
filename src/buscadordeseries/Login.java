@@ -1,6 +1,8 @@
 
 package buscadordeseries;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -120,13 +122,27 @@ public class Login extends javax.swing.JFrame {
         
         List<Usuario> a = usuarios.stream().filter((usuario)->usuario.getEmail().equals(etUsuario.toString())).collect(Collectors.toList());
         
-        if(a.get(0) != null && !a.isEmpty()){
+        
+        
+        try{
+            if(a.get(0) != null && !a.isEmpty()){
             if(a.get(0).getContraseña().equals(etClave.toString())){
-                Administrador admin = new Administrador();
-                admin.setLocationRelativeTo(null);
-                admin.setVisible(true);
+                String s = a.get(0).getTipoUsuario().toString();
+                if(a.get(0).getTipoUsuario().equals("ADMINISTRADOR")){
+                    Administrador admin = new Administrador();
+                    admin.setLocationRelativeTo(null);
+                    admin.setVisible(true);
+                }else{
+                    Principal p = new Principal();
+                    p.setLocationRelativeTo(null);
+                    p.setVisible(true);
+                }
             }
         }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+   
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed

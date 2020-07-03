@@ -5,12 +5,19 @@
  */
 package buscadordeseries;
 
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
+
 /**
  *
  * @author Memo CTM
  */
 public class Registrar extends javax.swing.JFrame {
 
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     /**
      * Creates new form Registrar
      */
@@ -63,6 +70,11 @@ public class Registrar extends javax.swing.JFrame {
         jLabel6.setText("Ocupacion :");
 
         btnRegistrarUsuario.setText("Registrar");
+        btnRegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarUsuarioActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("E-Mail :");
 
@@ -88,35 +100,36 @@ public class Registrar extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRegistrarUsuario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVolverRegistro))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnRegistrarUsuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnVolverRegistro))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(etClave, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(etNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(tvNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(etOcupacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel5)
+                                        .addComponent(etApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                                        .addComponent(etCorreo)
+                                        .addComponent(jLabel8)
+                                        .addComponent(etFechaNacimiento))
+                                    .addComponent(jLabel7)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(etClave, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(etNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tvNombre, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(etOcupacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel5)
-                                .addComponent(etApellido, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                .addComponent(etCorreo)
-                                .addComponent(jLabel8)
-                                .addComponent(etFechaNacimiento))
-                            .addComponent(jLabel7))))
+                        .addGap(201, 201, 201)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(jLabel1)
-                .addContainerGap(227, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,6 +183,31 @@ public class Registrar extends javax.swing.JFrame {
     private void etFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_etFechaNacimientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_etFechaNacimientoActionPerformed
+
+    private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
+        String nom = etNombre.getText().toString();
+        String ape = etApellido.getText().toString();
+        String cor= etCorreo.getText().toString();
+        boolean s = true;
+        String ocu= etOcupacion.getText().toString();
+        String cla= etClave.getText().toString();
+        
+        ControlUsuario conUsu = new ControlUsuario();
+        LinkedList<Usuario> usuarios = conUsu.load();
+        
+        try{
+            Usuario u = new Usuario(usuarios.size(),nom,ape,ocu,cor,cla,dateFormat.parse(etFechaNacimiento.getText().toString()),s,TipoUsuario.USUARIO);
+            usuarios.add(u);
+            conUsu.save(usuarios);
+        }catch(ParseException | IOException e){
+            e.printStackTrace(); 
+        }
+        
+        
+        
+                
+                
+    }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

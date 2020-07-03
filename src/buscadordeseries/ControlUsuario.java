@@ -43,7 +43,7 @@ public class ControlUsuario extends CsvControlador<Usuario> {
     public LinkedList<Usuario> load() {
         try{
             entidades = new LinkedList<>();
-            CsvReader leerUsuarios = new CsvReader(getFileName());
+            CsvReader leerUsuarios = new CsvReader(getFileName(),';');
             leerUsuarios.readHeaders();
             int cont=1;
             while (leerUsuarios.readRecord()){
