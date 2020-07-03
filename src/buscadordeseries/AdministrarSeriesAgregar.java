@@ -5,10 +5,9 @@
  */
 package buscadordeseries;
 
-/**
- *
- * @author Memo CTM
- */
+import java.util.LinkedList;
+
+
 public class AdministrarSeriesAgregar extends javax.swing.JFrame {
 
     /**

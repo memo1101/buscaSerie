@@ -1,3 +1,6 @@
-nombre;apellido;ocupacion;email;contraseña;fechaNacimiento;mayor14;tipoUsuario
-juan;araneda;constructos;juan@juan.cl;1234;12/09/97;true;USUARIO
-admin;admin;admin;admin@admin.cl;admin;01/10/92;;
+nombre;apellido;ocupacion;email;contrasenya;fechaNacimiento;mayor14;tipoUsuario
+juan;araneda;constructos;juan@juan.cl;1234;12/09/0097;true;USUARIO
+admin;admin;admin;admin@admin.cl;admin;01/10/0092;true;ADMINISTRADOR
+andres;andres;andres;andres;andres;10/03/1990;true;USUARIO
+jorge;jorge;jorge;jorge;1234;10/10/1990;true;USUARIO
+pedro;pedro;pedro;pedro;1234;10/12/1990;true;USUARIO

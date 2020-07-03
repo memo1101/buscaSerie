@@ -5,10 +5,6 @@
  */
 package buscadordeseries;
 
-/**
- *
- * @author Memo CTM
- */
 public class AdministrarUsuariosAgregar extends javax.swing.JFrame {
 
     /**

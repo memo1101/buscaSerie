@@ -1,9 +1,6 @@
 package buscadordeseries;
 
-/**
- *
- * @author Memo CTM
- */
+
 public class BuscadorDeSeries {
 
     public static void main(String[] args) {

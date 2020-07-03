@@ -5,10 +5,7 @@
  */
 package buscadordeseries;
 
-/**
- *
- * @author Memo CTM
- */
+
 public class Perfil extends javax.swing.JFrame {
 
     /**

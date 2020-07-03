@@ -33,7 +33,7 @@ public class ControlUsuario extends CsvControlador<Usuario> {
 
         addHeaders(csvWriter);
         for (Usuario usuario:
-                entidades) {
+                entidad) {
             writeUsuarios(csvWriter,usuario);
         }
         csvWriter.close();
@@ -63,7 +63,7 @@ public class ControlUsuario extends CsvControlador<Usuario> {
         csvWriter.write("apellido");
         csvWriter.write("ocupacion");
         csvWriter.write("email");
-        csvWriter.write("contraseña");
+        csvWriter.write("contrasenya");
         csvWriter.write("fechaNacimiento");
         csvWriter.write("mayor14");
         csvWriter.write("tipoUsuario");
@@ -75,23 +75,24 @@ public class ControlUsuario extends CsvControlador<Usuario> {
         csvWriter.write(usuario.getApellido());
         csvWriter.write(usuario.getOcupacion());
         csvWriter.write(usuario.getEmail());
-        csvWriter.write(usuario.getContraseña());
+        csvWriter.write(usuario.getContrasenya());
         csvWriter.write(dateFormat.format(usuario.getFechaNacimiento()));
-        csvWriter.write((usuario.getTipoUsuario().value));
         csvWriter.write(String.valueOf(usuario.isMayor14()));
+        csvWriter.write((usuario.getTipoUsuario().value));
         csvWriter.endRecord();
     }
+
     private Usuario parseSerie(CsvReader leerUsuarios, int cont) throws IOException, ParseException {
 
         String nombre = leerUsuarios.get(0);
         String apellido = leerUsuarios.get(1);
         String ocupacion =  leerUsuarios.get(2);
         String email= leerUsuarios.get(3);
-        String contraseña = leerUsuarios.get(5);
-        Date fechaNacimiento = dateFormat.parse(leerUsuarios.get(4));
+        String contrasenya = leerUsuarios.get(4);
+        Date fechaNacimiento = dateFormat.parse(leerUsuarios.get(5));
         boolean mayor14 = Boolean.parseBoolean(leerUsuarios.get(6));
         TipoUsuario tipoUsuario = TipoUsuario.get(leerUsuarios.get(7));
 
-        return new Usuario(cont,nombre,apellido,ocupacion,email,contraseña,fechaNacimiento,mayor14,tipoUsuario);
+        return new Usuario(cont,nombre,apellido,ocupacion,email,contrasenya,fechaNacimiento,mayor14,tipoUsuario);
     }
 }

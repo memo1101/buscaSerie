@@ -57,7 +57,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1.setText("Ingrese Correo -->");
 
-        jLabel2.setText("Contraseña -->");
+        jLabel2.setText("Contrasenya -->");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel3.setText("Login");
@@ -120,26 +120,25 @@ public class Login extends javax.swing.JFrame {
         ControlUsuario controlUsuario = new ControlUsuario();
         LinkedList<Usuario> usuarios = controlUsuario.load();
         
-        List<Usuario> a = usuarios.stream().filter((usuario)->usuario.getEmail().equals(etUsuario.toString())).collect(Collectors.toList());
-        
-        
-        
+        List<Usuario> a = usuarios.stream().filter((usuario)->usuario.getEmail().equals(etUsuario.getText())).collect(Collectors.toList());
+
         try{
             if(a.get(0) != null && !a.isEmpty()){
-            if(a.get(0).getContraseña().equals(etClave.toString())){
-                String s = a.get(0).getTipoUsuario().toString();
-                if(a.get(0).getTipoUsuario().equals("ADMINISTRADOR")){
-                    Administrador admin = new Administrador();
-                    admin.setLocationRelativeTo(null);
-                    admin.setVisible(true);
-                }else{
-                    Principal p = new Principal();
-                    p.setLocationRelativeTo(null);
-                    p.setVisible(true);
+                if(a.get(0).getContrasenya().equals(etClave.getText())){
+                    if(a.get(0).getTipoUsuario().compareTo(TipoUsuario.ADMINISTRADOR)==0){
+                        Administrador admin = new Administrador();
+                        admin.setLocationRelativeTo(null);
+                        admin.setVisible(true);
+
+                    }else{
+                        Principal p = new Principal();
+                        p.setLocationRelativeTo(null);
+                        p.setVisible(true);
+                    }
+                    dispose();
                 }
             }
-        }
-        }catch(Exception e){
+        }catch(NullPointerException  e){
             e.printStackTrace();
         }
    

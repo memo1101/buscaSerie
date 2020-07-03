@@ -5,16 +5,18 @@
  */
 package buscadordeseries;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
-/**
- *
- * @author Memo CTM
- */
+
 public class Registrar extends javax.swing.JFrame {
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -185,28 +187,29 @@ public class Registrar extends javax.swing.JFrame {
     }//GEN-LAST:event_etFechaNacimientoActionPerformed
 
     private void btnRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarUsuarioActionPerformed
-        String nom = etNombre.getText().toString();
-        String ape = etApellido.getText().toString();
-        String cor= etCorreo.getText().toString();
+        String nom = etNombre.getText();
+        String ape = etApellido.getText();
+        String cor= etCorreo.getText();
         boolean s = true;
-        String ocu= etOcupacion.getText().toString();
-        String cla= etClave.getText().toString();
+        String ocu= etOcupacion.getText();
+        String cla= etClave.getText();
         
         ControlUsuario conUsu = new ControlUsuario();
         LinkedList<Usuario> usuarios = conUsu.load();
-        
-        try{
-            Usuario u = new Usuario(usuarios.size(),nom,ape,ocu,cor,cla,dateFormat.parse(etFechaNacimiento.getText().toString()),s,TipoUsuario.USUARIO);
-            usuarios.add(u);
-            conUsu.save(usuarios);
-        }catch(ParseException | IOException e){
-            e.printStackTrace(); 
+        List<Usuario> existe = usuarios.stream().filter(usuario -> usuario.getEmail().equals(etCorreo.getText())).collect(Collectors.toList());
+        if(existe.isEmpty()){
+            try{
+                Usuario u = new Usuario(usuarios.size(),nom,ape,ocu,cor,cla,dateFormat.parse(etFechaNacimiento.getText()),s,TipoUsuario.USUARIO);
+                usuarios.add(u);
+                conUsu.save(usuarios);
+                dispose();
+            }catch(ParseException | IOException e){
+                e.printStackTrace();
+            }
+        }else {
+            JOptionPane jOptionPane = new JOptionPane();
+            jOptionPane.createDialog("Correo ya existe");
         }
-        
-        
-        
-                
-                
     }//GEN-LAST:event_btnRegistrarUsuarioActionPerformed
 
     /**

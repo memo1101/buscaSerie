@@ -7,18 +7,18 @@ public class Usuario extends Entidad {
     private String apellido;
     private String ocupacion;
     private String email;
-    private String contraseña;
+    private String contrasenya;
     private Date fechaNacimiento;
     private boolean mayor14;
     private TipoUsuario tipoUsuario;
 
-    public Usuario(int id,String nombre, String apellido, String ocupacion, String email, String contraseña, Date fechaNacimiento, boolean mayor14, TipoUsuario tipoUsuario) {
+    public Usuario(int id,String nombre, String apellido, String ocupacion, String email, String contrasenya, Date fechaNacimiento, boolean mayor14, TipoUsuario tipoUsuario) {
         this.id=id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.ocupacion = ocupacion;
         this.email = email;
-        this.contraseña = contraseña;
+        this.contrasenya = contrasenya;
         this.fechaNacimiento = fechaNacimiento;
         this.mayor14 = mayor14;
         this.tipoUsuario = tipoUsuario;
@@ -56,12 +56,12 @@ public class Usuario extends Entidad {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenya() {
+        return contrasenya;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasenya(String contrasenya) {
+        this.contrasenya = contrasenya;
     }
 
     public Date getFechaNacimiento() {
