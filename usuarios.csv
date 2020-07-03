@@ -1,0 +1,3 @@
+nombre;apellido;ocupacion;email;contraseña;fechaNacimiento;mayor14;tipoUsuario
+juan;araneda;constructos;juan@juan.cl;1234;12/09/97;true;USUARIO
+admin;admin;admin;admin@admin.cl;admin;01/10/92;;
