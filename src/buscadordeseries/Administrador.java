@@ -11,7 +11,7 @@ public class Administrador extends javax.swing.JFrame {
     /**
      * Creates new form Administrador
      */
-    public Administrador() {
+    public Administrador(ControlSeries controlSeries, ControlUsuario controlUsuario) {
         initComponents();
     }
 

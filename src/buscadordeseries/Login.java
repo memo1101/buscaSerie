@@ -126,12 +126,14 @@ public class Login extends javax.swing.JFrame {
             if(a.get(0) != null && !a.isEmpty()){
                 if(a.get(0).getContrasenya().equals(etClave.getText())){
                     if(a.get(0).getTipoUsuario().compareTo(TipoUsuario.ADMINISTRADOR)==0){
-                        Administrador admin = new Administrador();
+                        ControlSeries controlSeries = new ControlSeries();
+                        controlSeries.load();
+                        Administrador admin = new Administrador(controlSeries, controlUsuario);
                         admin.setLocationRelativeTo(null);
                         admin.setVisible(true);
 
                     }else{
-                        Principal p = new Principal();
+                        Principal p = new Principal(controlSeries,controlUsuario);
                         p.setLocationRelativeTo(null);
                         p.setVisible(true);
                     }
